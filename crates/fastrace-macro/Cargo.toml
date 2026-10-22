@@ -1,0 +1,31 @@
+[package]
+name = "fastrace-macro"
+version = "0.7.19"
+
+categories = ["development-tools::debugging"]
+description = "Attribute procedural macro for fastrace"
+documentation = "https://docs.rs/fastrace-macro"
+keywords = ["tracing", "span", "opentelemetry"]
+readme = "README.md"
+
+edition.workspace = true
+license.workspace = true
+repository.workspace = true
+rust-version.workspace = true
+
+[lib]
+proc-macro = true
+
+[features]
+enable = []
+
+[dependencies]
+proc-macro2 = { version = "1.0.106" }
+quote = { version = "1.0.45" }
+syn = { version = "3.0.3", features = [
+  "full",
+  "parsing",
+  "extra-traits",
+  "proc-macro",
+  "visit-mut",
+] }

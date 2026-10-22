@@ -1,0 +1,20 @@
+[package]
+name = "tests-integration"
+publish = false
+version = "0.0.0"
+
+edition.workspace = true
+rust-version.workspace = true
+
+[package.metadata.release]
+release = false
+
+[dev-dependencies]
+async-trait = { workspace = true }
+crossbeam = { workspace = true }
+fastrace = { workspace = true, features = ["enable"] }
+futures-timer = { workspace = true }
+insta = { workspace = true }
+pollster = { workspace = true }
+serial_test = { workspace = true }
+tokio = { workspace = true }

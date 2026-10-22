@@ -1,0 +1,25 @@
+[package]
+name = "fastrace-opentelemetry"
+version = "0.19.0"
+
+categories = ["development-tools::debugging"]
+description = "Opentelemetry reporter for fastrace"
+documentation = "https://docs.rs/fastrace-opentelemetry"
+keywords = ["tracing", "span", "opentelemetry"]
+readme = "README.md"
+
+edition.workspace = true
+license.workspace = true
+repository.workspace = true
+rust-version.workspace = true
+
+[dependencies]
+fastrace = { workspace = true }
+log = { workspace = true }
+opentelemetry = { workspace = true }
+opentelemetry_sdk = { workspace = true }
+pollster = { workspace = true }
+
+[dev-dependencies]
+fastrace = { workspace = true, features = ["enable"] }
+opentelemetry-otlp = { workspace = true }

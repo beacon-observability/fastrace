@@ -1,0 +1,7 @@
+error: invalid format string: unmatched `}` found
+ --> tests/ui/err/properties-partial-escape.rs:3:33
+  |
+3 | #[trace(properties = { "a": "{{b}" })]
+  |                                 ^ unmatched `}` in format string
+  |
+  = note: if you intended to print `}`, you can escape it using `}}`

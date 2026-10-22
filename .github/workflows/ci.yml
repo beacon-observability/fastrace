@@ -1,0 +1,93 @@
+name: CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+env:
+  CARGO_TERM_COLOR: always
+
+jobs:
+  check:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v7
+      - uses: crate-ci/typos@master
+      - uses: Swatinem/rust-cache@v2
+      - run: rm rust-toolchain.toml
+        shell: bash
+      - uses: dtolnay/rust-toolchain@master
+        with:
+          toolchain: nightly
+          components: rustfmt,clippy
+      - name: Cargo version
+        run: cargo --version
+      - name: Check workspace
+        run: |
+          cargo fmt --all -- --check
+          cargo clippy --all-targets --all-features -- --deny warnings
+      - name: Check benches
+        working-directory: benches
+        run: |
+          cargo fmt --all -- --check
+          cargo clippy --all-targets --all-features -- --deny warnings
+      - name: Check examples
+        working-directory: examples
+        run: |
+          cargo fmt --all -- --check
+          cargo clippy --all-targets --all-features -- --deny warnings
+
+  tests:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ windows-latest, macos-latest, ubuntu-latest ]
+        rust: [ "1.91.0", "stable", "nightly" ]
+    env:
+      RUST_BACKTRACE: 1
+    steps:
+      - uses: actions/checkout@v7
+      - uses: Swatinem/rust-cache@v2
+      - run: rm rust-toolchain.toml
+      - uses: dtolnay/rust-toolchain@master
+        with:
+          toolchain: ${{ matrix.rust }}
+      - uses: taiki-e/install-action@v2
+        with:
+          tool: nextest,cargo-nextest
+      - name: Cargo version
+        run: cargo --version
+
+      - name: Run workspace tests
+        run: |
+          cargo build --workspace --all-features --all-targets
+          cargo nextest run --workspace
+          cargo test --doc
+
+      - name: Run examples
+        working-directory: examples
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          cargo metadata --no-deps --format-version 1 | jq -er '
+            [
+              .packages[] as $package
+              | $package.targets[]
+              | select(.kind | index("bin"))
+              | [$package.name, .name]
+              | @tsv
+            ]
+            | if length == 0 then error("no runnable example targets found") else .[] end
+          ' | tr -d '\r' | while IFS=$'\t' read -r package target; do
+            echo "::group::cargo run --package ${package} --bin ${target}"
+            cargo run --package "${package}" --bin "${target}"
+            echo "::endgroup::"
+          done
+
+      - name: Run benches
+        working-directory: benches
+        run: cargo bench --workspace

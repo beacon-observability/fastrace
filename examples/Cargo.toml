@@ -1,0 +1,47 @@
+[workspace]
+members = [
+  "console-reporter",
+  "fastrace-disabled",
+  "log-integration",
+  "opentelemetry-reporter",
+  "sampling",
+  "test-harness-integration",
+]
+resolver = "3"
+
+[workspace.package]
+edition = "2024"
+publish = false
+version = "0.0.0"
+
+[workspace.dependencies]
+anyhow = { version = "1.0.102" }
+fastrace = { path = "../crates/fastrace" }
+fastrace-opentelemetry = { path = "../crates/fastrace-opentelemetry" }
+log = { version = "0.4.32" }
+logcall = { version = "0.2.0" }
+logforth = { version = "0.30.1", features = [
+  "append-fastrace",
+  "diagnostic-fastrace",
+  "starter-log",
+] }
+opentelemetry = { version = "0.33.1", default-features = false, features = [
+  "trace",
+] }
+opentelemetry-otlp = { version = "0.33.1", default-features = false, features = [
+  "trace",
+  "grpc-tonic",
+] }
+opentelemetry_sdk = { version = "0.33.1", default-features = false, features = [
+  "trace",
+] }
+test-harness = { version = "0.3.1" }
+tokio = { version = "1.52.3", features = ["full"] }
+
+[patch.crates-io]
+# Patch fastrace in crates.io because we import logforth in the examples, which
+# itself depends on fastrace from crates.io. If we don't do this, examples break
+# because logforth brings in a different version of fastrace and the appender
+# stops working.
+fastrace = { path = "../crates/fastrace" }
+fastrace-macro = { path = "../crates/fastrace-macro" }

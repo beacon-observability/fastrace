@@ -1,0 +1,26 @@
+[package]
+name = "fastrace-futures"
+version = "0.7.19"
+
+categories = ["development-tools::debugging"]
+description = "Utilities for tracing `futures` with fastrace"
+documentation = "https://docs.rs/fastrace-futures"
+keywords = ["tracing", "span", "futures", "opentelemetry"]
+readme = "README.md"
+
+edition.workspace = true
+license.workspace = true
+repository.workspace = true
+rust-version.workspace = true
+
+[dependencies]
+fastrace = { workspace = true }
+futures-core = { workspace = true }
+futures-sink = { workspace = true }
+pin-project = { workspace = true }
+
+[dev-dependencies]
+async-stream = { workspace = true }
+fastrace = { workspace = true, features = ["enable"] }
+futures = { workspace = true }
+tokio = { workspace = true }
