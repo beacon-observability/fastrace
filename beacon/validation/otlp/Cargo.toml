@@ -1,0 +1,17 @@
+[package]
+name = "fastrace-otlp-acceptance"
+version = "0.0.0"
+edition = "2024"
+publish = false
+license = "Apache-2.0"
+rust-version = "1.91.0"
+
+[workspace]
+
+[dependencies]
+fastrace = { path = "../../../crates/fastrace", features = ["enable"] }
+fastrace-opentelemetry = { path = "../../../crates/fastrace-opentelemetry" }
+opentelemetry = { version = "0.33.1", default-features = false, features = ["trace"] }
+opentelemetry-otlp = { version = "0.33.1", default-features = false, features = ["trace", "grpc-tonic"] }
+opentelemetry_sdk = { version = "0.33.1", default-features = false, features = ["trace"] }
+tokio = { version = "1.52.3", features = ["rt-multi-thread", "macros"] }

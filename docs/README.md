@@ -26,6 +26,7 @@ Features:
 - [Migrating from tokio-tracing](migrating-from-tracing.md): the Fastrace compatibility layer.
 - [Frequently asked questions](faq.md): performance design and tracing concepts.
 - [Benchmarks](benchmarks.md): upstream results by architecture and span count.
+- [DataKit OTLP acceptance](validation.md): a reproducible two-process propagation and backend-ingestion check.
 
 ## Resources
 
