@@ -13,4 +13,4 @@ This is an independent source snapshot, without a GitHub fork relationship or sh
 3. On a clean synchronization branch, use `git apply --3way <patch>`; resolve conflicts and retain Beacon changes. Apply upstream README edits to the corresponding guides under docs/, retaining the project README attribution and documentation index.
 4. Run relevant [checks](../CONTRIBUTING.md), update this baseline, and submit a PR. Successful application alone is not validation.
 
-Initial changes are documentation only; there is no independent Beacon release.
+Beacon v0.1.0 retains the baseline SDK and reporter implementation unchanged. Downstream additions are English documentation, source-release instructions, and a reproducible DataKit acceptance harness. Beacon release tags version the source distribution independently of the retained upstream crate versions; see [installation](../docs/installation.md) and [release maintenance](RELEASING.md).

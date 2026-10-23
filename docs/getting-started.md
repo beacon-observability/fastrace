@@ -1,5 +1,7 @@
 # Getting Started
 
+The registry dependencies below describe upstream packages. To use the Beacon-maintained source distribution, follow [Beacon source installation](installation.md) and retain its fixed Git dependencies when applying these instrumentation examples.
+
 ## In Libraries
 
 Libraries should include `fastrace` as a dependency without enabling any extra features.

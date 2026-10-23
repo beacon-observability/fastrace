@@ -1,6 +1,6 @@
 # DataKit OTLP Acceptance
 
-This development acceptance sends a synthetic trace from two independent Rust processes to a local DataKit OTLP/gRPC receiver. It verifies stored backend records rather than treating exporter completion as proof of ingestion. It does not define an independent Beacon release.
+This acceptance sends a synthetic trace from two independent Rust processes to a local DataKit OTLP/gRPC receiver. It verifies stored backend records rather than treating exporter completion as proof of ingestion. The record below predates source release v0.1.0; the release notes record artifact validation separately.
 
 ## Reproduce
 

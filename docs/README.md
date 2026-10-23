@@ -21,6 +21,7 @@ Features:
 
 ## Guides
 
+- [Beacon source installation](installation.md): fixed release tag, verified source archive, local DataKit export, and upgrade or rollback.
 - [Getting started](getting-started.md): library and application instrumentation, initialization, and supported Rust versions.
 - [Reporters and integrations](integrations.md): OpenTelemetry export, framework integrations, and projects using Fastrace.
 - [Migrating from tokio-tracing](migrating-from-tracing.md): the Fastrace compatibility layer.
